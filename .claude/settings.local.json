@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c ' *)",
+      "Bash(python3 -c \"import fastapi, sklearn, PIL\")",
+      "Bash(pip install *)",
+      "Bash(pip3 --version)",
+      "Bash(pip3 install *)",
+      "Bash(python3 -m uvicorn main:app --port 8000)",
+      "Bash(curl -s http://localhost:8000/api/health)",
+      "Bash(pnpm dev *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "Bash(npx --version)",
+      "Read(//usr/local/bin/**)",
+      "Read(//Users/admin/.volta/**)",
+      "Bash(find /usr /opt /Applications -name \"node\" -type f 2>/dev/null | head -5; ls ~/Library/pnpm/ 2>/dev/null | head -5)",
+      "Bash(ls /Applications/Claude.app/Contents/Resources/ 2>/dev/null | head; ls /Applications/Cursor.app/Contents/Resources/ 2>/dev/null | head; find ~/Library -name \"pnpm\" -type f 2>/dev/null | head -3; find ~/Library -name \"npm\" -type f 2>/dev/null | head -3)",
+      "Bash(cat ~/.local/bin/env 2>/dev/null | head -20)",
+      "Bash(lsof -ti:8000)",
+      "Bash(xargs kill -9)"
+    ]
+  }
+}
