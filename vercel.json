@@ -1,0 +1,10 @@
+{
+  "name": "truenova-ai",
+  "framework": "nextjs",
+  "buildCommand": "pnpm exec next build",
+  "installCommand": "pnpm install",
+  "outputDirectory": ".next",
+  "env": {
+    "NEXT_PUBLIC_API_URL": "https://truenova-backend.onrender.com"
+  }
+}

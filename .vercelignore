@@ -1,0 +1,7 @@
+backend/
+*.pkl
+*.joblib
+*.h5
+__pycache__/
+.env.local
+.env.development
