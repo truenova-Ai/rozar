@@ -11,9 +11,11 @@ interface SidebarProps {
   history:        HistoryItem[]
   onClearHistory: () => void
   onAbout:        () => void
+  isMobileOpen:   boolean
+  onMobileClose:  () => void
 }
 
-export default function Sidebar({ currentPage, onNavigate, history, onClearHistory, onAbout }: SidebarProps) {
+export default function Sidebar({ currentPage, onNavigate, history, onClearHistory, onAbout, isMobileOpen, onMobileClose }: SidebarProps) {
   const [isCollapsed, setIsCollapsed] = useState(false)
 
   const navItems: { page: Page; icon: React.ElementType; label: string }[] = [
@@ -24,7 +26,23 @@ export default function Sidebar({ currentPage, onNavigate, history, onClearHisto
   ]
 
   return (
-    <div className={`bg-white/95 dark:bg-black/95 backdrop-blur-md border-r border-gray-200 dark:border-white/10 transition-all duration-300 ${isCollapsed ? 'w-20' : 'w-64'}`}>
+    <>
+      {/* Mobile backdrop */}
+      {isMobileOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm md:hidden"
+          onClick={onMobileClose}
+        />
+      )}
+
+    <div className={`
+      fixed inset-y-0 left-0 z-50
+      ${isMobileOpen ? 'translate-x-0' : '-translate-x-full'}
+      md:relative md:translate-x-0 md:z-auto
+      bg-white/95 dark:bg-black/95 backdrop-blur-md border-r border-gray-200 dark:border-white/10
+      transition-all duration-300
+      w-72 ${isCollapsed ? 'md:w-20' : 'md:w-64'}
+    `}>
       <div className="h-screen flex flex-col">
 
         {/* Logo */}
@@ -40,7 +58,7 @@ export default function Sidebar({ currentPage, onNavigate, history, onClearHisto
           )}
           <button
             onClick={() => setIsCollapsed(!isCollapsed)}
-            className="text-gray-400 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-400 transition"
+            className="hidden md:block text-gray-400 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-400 transition"
           >
             {isCollapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
           </button>
@@ -49,7 +67,7 @@ export default function Sidebar({ currentPage, onNavigate, history, onClearHisto
         {/* New Scan button */}
         <div className="p-4 border-b border-gray-200 dark:border-white/10">
           <button
-            onClick={() => onNavigate('text')}
+            onClick={() => { onNavigate('text'); onMobileClose() }}
             className={`w-full flex items-center justify-center gap-2 py-2.5 rounded-lg font-medium text-sm
               bg-black/90 dark:bg-white/90 backdrop-blur-sm
               text-white dark:text-black
@@ -73,7 +91,7 @@ export default function Sidebar({ currentPage, onNavigate, history, onClearHisto
               const Icon = item.icon
               const active = currentPage === item.page
               return (
-                <button key={item.page} onClick={() => onNavigate(item.page)} title={item.label}
+                <button key={item.page} onClick={() => { onNavigate(item.page); onMobileClose() }} title={item.label}
                   className={`w-full flex justify-center p-2.5 rounded-lg transition-all duration-200
                     ${active
                       ? 'bg-black/10 dark:bg-white/10 text-black dark:text-white'
@@ -170,5 +188,6 @@ export default function Sidebar({ currentPage, onNavigate, history, onClearHisto
         )}
       </div>
     </div>
+    </>
   )
 }

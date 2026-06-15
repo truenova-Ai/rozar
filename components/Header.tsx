@@ -1,17 +1,32 @@
 'use client'
 
-import { Moon, Sun } from 'lucide-react'
+import { Moon, Sun, Menu } from 'lucide-react'
 
 interface HeaderProps {
   theme:         'light' | 'dark'
   onThemeToggle: () => void
   onLogout:      () => void
+  onMenuOpen:    () => void
 }
 
-export default function Header({ theme, onThemeToggle, onLogout }: HeaderProps) {
+export default function Header({ theme, onThemeToggle, onLogout, onMenuOpen }: HeaderProps) {
   return (
-    <header className="border-b border-gray-200 dark:border-white/10 bg-white/80 dark:bg-black/80 backdrop-blur-md px-6 py-4 sticky top-0 z-40">
-      <div className="flex items-center justify-end gap-3">
+    <header className="border-b border-gray-200 dark:border-white/10 bg-white/80 dark:bg-black/80 backdrop-blur-md px-4 py-4 sticky top-0 z-40">
+      <div className="flex items-center justify-between">
+        {/* Hamburger — mobile only */}
+        <button
+          onClick={onMenuOpen}
+          aria-label="Open menu"
+          className="md:hidden p-2 rounded-lg
+            bg-gray-100/80 dark:bg-white/10 backdrop-blur-sm
+            border border-gray-200/60 dark:border-white/10
+            text-gray-700 dark:text-gray-400
+            active:scale-95 transition-all duration-200"
+        >
+          <Menu size={18} strokeWidth={1.5} />
+        </button>
+
+      <div className="flex items-center gap-3 ml-auto">
         {/* Theme toggle — glass */}
         <button
           onClick={onThemeToggle}
@@ -41,6 +56,7 @@ export default function Header({ theme, onThemeToggle, onLogout }: HeaderProps) 
         >
           G
         </div>
+      </div>
       </div>
     </header>
   )

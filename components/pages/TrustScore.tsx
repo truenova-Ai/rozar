@@ -266,7 +266,7 @@ export default function TrustScore({ onBack, onAddHistory }: TrustScoreProps) {
         </p>
 
         {/* How it works strip */}
-        <div className="mb-10 grid grid-cols-5 gap-2">
+        <div className="mb-10 grid grid-cols-3 md:grid-cols-5 gap-2">
           {Object.entries(DIM_META).map(([key, meta]) => (
             <div key={key}
               className="flex flex-col items-center gap-1 p-3

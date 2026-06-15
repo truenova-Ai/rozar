@@ -217,16 +217,16 @@ export default function TextAnalysis({ onBack, onAddHistory }: TextAnalysisProps
           <div className="p-6 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl backdrop-blur-sm">
             <div className="mb-6">
               <p className="text-xs text-gray-600 dark:text-gray-500 font-light mb-2">VERDICT</p>
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between flex-wrap gap-2">
                 <div className="flex items-center gap-3">
                   {result.verdict === 'REAL'
-                    ? <CheckCircle2 size={28} className="text-green-500" />
-                    : <XCircle     size={28} className="text-red-500"   />}
-                  <h2 className="text-2xl font-light text-black dark:text-white">
+                    ? <CheckCircle2 size={24} className="text-green-500 shrink-0" />
+                    : <XCircle     size={24} className="text-red-500 shrink-0"   />}
+                  <h2 className="text-xl md:text-2xl font-light text-black dark:text-white">
                     {result.verdict === 'REAL' ? 'Authentic News' : 'Suspicious Content'}
                   </h2>
                 </div>
-                <span className={`text-4xl font-semibold tracking-tight ${result.verdict === 'REAL' ? 'text-green-500' : 'text-red-500'}`}>
+                <span className={`text-3xl md:text-4xl font-semibold tracking-tight ${result.verdict === 'REAL' ? 'text-green-500' : 'text-red-500'}`}>
                   {result.verdict}
                 </span>
               </div>
@@ -344,13 +344,13 @@ export default function TextAnalysis({ onBack, onAddHistory }: TextAnalysisProps
 
           {/* ── Related News Articles ── */}
           <div className="p-6 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl backdrop-blur-sm">
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex flex-wrap items-center gap-2 mb-4">
               <div className="flex items-center gap-2">
                 <Newspaper size={14} className="text-gray-500 dark:text-gray-400" />
                 <p className="text-xs text-gray-600 dark:text-gray-500 font-light tracking-wider">RELATED NEWS ARTICLES</p>
               </div>
               {relatedData?.query && (
-                <span className="text-xs text-gray-400 dark:text-gray-600 font-light">
+                <span className="text-xs text-gray-400 dark:text-gray-600 font-light truncate max-w-[180px]">
                   Query: <em>{relatedData.query}</em>
                 </span>
               )}
